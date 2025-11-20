@@ -1,0 +1,124 @@
+''' element = None
+        if locator_name.endswith("_id"):
+            element = self.driver.find_element(By.ID,locator_value)
+        elif locator_name.endswith("_name"):
+            element = self.driver.find_element(By.NAME,locator_value)
+        elif locator_name.endswith("_class_name"):
+            element = self.driver.find_element(By.CLASS_NAME,locator_value)
+        elif locator_name.endswith("_link_text"):
+            element = self.driver.find_element(By.LINK_TEXT,locator_value)
+        elif locator_name.endswith("_partial_link_text"):
+            element = self.driver.find_element(By.PARTIAL_LINK_TEXT,locator_value)
+        elif locator_name.endswith("_xpath"):
+            element = self.driver.find_element(By.XPATH,locator_value)
+        elif locator_name.endswith("_css"):
+            element = self.driver.find_element(By.CSS_SELECTOR,locator_value)
+        return element
+
+
+    def wait_for_element(self,locator_name, locator_value, condition= None, timeout=20):
+        by = None
+        if locator_name.endswith("_id"):
+            by = By.ID
+        elif locator_name.endswith("_name"):
+            by = By.NAME
+        elif locator_name.endswith("_class_name"):
+            by = By.CLASS_NAME
+        elif locator_name.endswith("_link_text"):
+            by = By.LINK_TEXT
+        elif locator_name.endswith("_partial_link_text"):
+            by = By.PARTIAL_LINK_TEXT
+        elif locator_name.endswith("_xpath"):
+            by = By.XPATH
+        elif locator_name.endswith("_css"):
+            by = By.CSS_SELECTOR
+
+        if not by:
+            raise ValueError(f"Locator type for '{locator_name}' not supported.")
+
+        wait = WebDriverWait(self.driver, timeout)
+
+        if condition == "visible":
+            return wait.until(EC.visibility_of_element_located((by, locator_value)))
+        elif condition == "clickable":
+            return wait.until(EC.element_to_be_clickable((by, locator_value)))
+        else:
+            raise ValueError(f"Condition '{condition}' not supported. Use 'visible' or 'clickable'.")'''
+
+__________________________________________________________________
+        def select_date(self, date_string: str):
+
+        # ---------- PREPARE DATE ----------
+        date_string = date_string.replace("-", "/").replace(".", "/")
+        target = datetime.strptime(date_string, "%d/%m/%Y")
+
+        # ---------- LOCATORS ----------
+        HEADER = ("_css", "button.mat-calendar-period-button span[aria-hidden='true']")
+        HEADER_BTN = ("_css", "button.mat-calendar-period-button")
+
+        PREV_24 = ("_xpath", "//button[@aria-label='Previous 24 years']")
+        NEXT_24 = ("_xpath", "//button[@aria-label='Next 24 years']")
+
+        YEAR_CELL = ("_xpath", f"//span[normalize-space()='{target.year}']")
+
+        target_month = target.strftime("%b").upper().replace("SEPT", "SEP")
+        MONTH_CELL = ("_xpath", f"//span[normalize-space()='{target_month}']")
+
+        DAY_CELL = (
+            "_xpath",
+            f"//span[contains(@class,'mat-calendar-body-cell-content') "
+            f"and normalize-space(text())='{target.day}']"
+        )
+
+        # ---------- GET HEADER ----------
+        def read_header():
+            try:
+                t = self.get_element(*HEADER, condition="visible").text.strip()
+                parts = t.split()
+                if len(parts) == 1:
+                    return int(parts[0]), None  # "2002"
+                return int(parts[1]), parts[0]  # "NOV 2002"
+            except Exception:
+                return None, None
+
+        # ---------- STEP 1: OPEN YEAR VIEW ----------
+        displayed_year, displayed_month = read_header()
+
+        if displayed_year != target.year:
+            self.get_element(*HEADER_BTN, condition="clickable").click()
+            time.sleep(0.2)
+
+            while True:
+                all_labels = self.get_elements("_xpath", "//span[normalize-space()]")
+                years = [int(i.text) for i in all_labels if i.text.isdigit()]
+
+                if target.year in years:
+                    # Select the year
+                    self.get_element(*YEAR_CELL, condition="clickable").click()
+                    time.sleep(0.1)
+
+                    # Wait for month grid to appear
+                    for _ in range(40):
+                        yr, mn = read_header()
+                        if mn is not None:
+                            break
+                        time.sleep(0.05)
+
+                    # ❗ Critical: DO NOT RECLICK HEADER
+                    # The month grid will auto-close otherwise
+                    break
+
+                if target.year < min(years):
+                    self.get_element(*PREV_24, condition="clickable").click()
+                else:
+                    self.get_element(*NEXT_24, condition="clickable").click()
+
+                time.sleep(0.2)
+
+        # ---------- STEP 2: CLICK MONTH IMMEDIATELY ----------
+        self.get_element(*MONTH_CELL, condition="clickable").click()
+        time.sleep(0.1)
+
+        # ---------- STEP 3: SELECT THE DAY ----------
+        self.get_element(*DAY_CELL, condition="clickable").click()
+        time.sleep(0.1)
