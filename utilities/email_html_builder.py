@@ -1,13 +1,17 @@
-def build_email_body(total, passed, failed, skipped, report_time, zip_password="FatakPay123"):
+from utilities.config_reader import get_config
+
+def build_email_body(total, passed, failed, skipped, report_time, drive_link, zip_password="FatakPay123"):
 
     html = (
         '<table width="600" align="center" cellpadding="0" cellspacing="0" '
         'style="margin:0 auto;padding:0;border-collapse:collapse;font-family:Arial,Helvetica,sans-serif;">'
 
+        # HEADER
         '<tr><td style="padding:0;margin:0;font-size:20px;font-weight:bold;color:#2e6c80;text-align:center;">'
         'Automation Test Report'
         '</td></tr>'
 
+        # HELLO TEXT
         '<tr><td style="padding:10px 0 0 0;margin:0;font-size:13px;color:#333;">'
         'Hello Team,'
         '</td></tr>'
@@ -17,6 +21,7 @@ def build_email_body(total, passed, failed, skipped, report_time, zip_password="
         'Please find the summary below:'
         '</td></tr>'
 
+        # SUMMARY TABLE
         '<tr><td style="padding:10px 0;margin:0;">'
         '<table width="100%" cellpadding="4" cellspacing="0" '
         'style="border-collapse:collapse;margin:0;padding:0;text-align:center;font-size:12px;">'
@@ -40,17 +45,14 @@ def build_email_body(total, passed, failed, skipped, report_time, zip_password="
         '</table>'
         '</td></tr>'
 
-        # ⭐ ADDED PASSWORD SECTION (NON-BREAKING)
+        # VIEW REPORT LINK
         f'<tr><td style="padding:10px 0 0 0;margin:0;font-size:13px;color:#333;">'
-        f'<b>ZIP Password:</b> <span style="color:#d9534f;">{zip_password}</span>'
+        f'Click below to view the complete Allure Report:<br>'
+        f'<a href="{drive_link}" style="color:#1a73e8;">Open Allure Report</a>'
         '</td></tr>'
 
-        '<tr><td style="padding:10px 0;margin:0;font-size:13px;color:#333;">'
-        'The complete Allure report is attached as a password-protected ZIP file.<br>'
-        'Unzip and open <b>index.html</b> to view the full report.'
-        '</td></tr>'
-
-        '<tr><td style="padding:10px 0;margin:0;font-size:13px;color:#333;">'
+        # FOOTER
+        '<tr><td style="padding:10px 20px 0 0;margin:0;font-size:13px;color:#333;">'
         'Regards,<br>'
         '<b>An SDET from the QA Automation Team.</b><br>'
         'FatakPay'

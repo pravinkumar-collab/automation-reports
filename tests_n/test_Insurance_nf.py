@@ -83,8 +83,7 @@ class TestInsuranceNegative(ParentTest):
         pop.select_payment()
         time.sleep(10)
         congrats_msg = pop.verify_congratulation_text()
-        assert "ASDFGH" in congrats_msg
-        # assert "Your policy number will be generated against this " in congrats_msg
+        assert "Your policy number will be generated against this " in congrats_msg
         print("Working")
 
 
