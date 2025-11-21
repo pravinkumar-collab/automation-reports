@@ -1,6 +1,6 @@
 from utilities.config_reader import get_config
 
-def build_email_body(total, passed, failed, skipped, report_time, drive_link, zip_password="FatakPay123"):
+def build_email_body(total, passed, failed, skipped, report_time, drive_link):
 
     html = (
         '<table width="600" align="center" cellpadding="0" cellspacing="0" '
