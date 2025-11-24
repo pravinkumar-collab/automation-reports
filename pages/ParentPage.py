@@ -38,7 +38,7 @@ class ParentPage:
 
         # FRAME HANDLING
         if condition == "frame":
-            return wait.until(EC.presence_of_element_located((by, locator_value)))
+            return wait.until(EC.frame_to_be_available_and_switch_to_it((by, locator_value)))
             # No condition → simple find
         if condition is None:
             return self.driver.find_element(by, locator_value)

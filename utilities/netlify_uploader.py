@@ -1,4 +1,3 @@
-import os
 import subprocess
 from utilities.config_reader import get_config
 
@@ -38,24 +37,23 @@ def deploy_to_netlify(folder_path):
 
 def extract_final_url(output):
     """
-    Extracts the production URL ONLY.
+    Extracts a clean Netlify URL from CLI output.
+    Removes Unicode borders and trailing junk characters.
     """
 
     for line in output.splitlines():
         line = line.strip()
 
-        if "Deployed to production URL:" in line:
-            url = "http" + line.split("http", 1)[1]
-            return url.rstrip("│║╚╝╔╗─— ").strip()
-
-    # fallback in case format changes
-    for line in output.splitlines():
-        line = line.strip()
         if "http" in line:
+            # Isolate starting from the first "http"
             url = "http" + line.split("http", 1)[1]
-            return url.rstrip("│║╚╝╔╗─— ").strip()
+
+            # Remove trailing box characters (│ ╯ ╰ etc.)
+            url = url.rstrip("│║╚╝╔╗─— ")
+
+            # Remove surrounding whitespace
+            return url.strip()
 
     return None
-
 
 

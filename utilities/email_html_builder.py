@@ -1,17 +1,17 @@
-from utilities.config_reader import get_config
-
-def build_email_body(total, passed, failed, skipped, report_time, drive_link):
+def build_email_body(total, passed, failed, skipped, report_time, report_link):
 
     html = (
         '<table width="600" align="center" cellpadding="0" cellspacing="0" '
-        'style="margin:0 auto;padding:0;border-collapse:collapse;font-family:Arial,Helvetica,sans-serif;">'
+        'style="margin:0 auto;padding:0;border-collapse:collapse;'
+        'font-family:Arial,Helvetica,sans-serif;">'
 
         # HEADER
-        '<tr><td style="padding:0;margin:0;font-size:20px;font-weight:bold;color:#2e6c80;text-align:center;">'
+        '<tr><td style="padding:0;margin:0;font-size:20px;font-weight:bold;'
+        'color:#2e6c80;text-align:center;">'
         'Automation Test Report'
         '</td></tr>'
 
-        # HELLO TEXT
+        # GREETING
         '<tr><td style="padding:10px 0 0 0;margin:0;font-size:13px;color:#333;">'
         'Hello Team,'
         '</td></tr>'
@@ -24,7 +24,8 @@ def build_email_body(total, passed, failed, skipped, report_time, drive_link):
         # SUMMARY TABLE
         '<tr><td style="padding:10px 0;margin:0;">'
         '<table width="100%" cellpadding="4" cellspacing="0" '
-        'style="border-collapse:collapse;margin:0;padding:0;text-align:center;font-size:12px;">'
+        'style="border-collapse:collapse;margin:0;padding:0;text-align:center;'
+        'font-size:12px;">'
 
         '<tr style="background:#f0f0f0;font-weight:bold;">'
         '<td style="border:1px solid #ccc;">Total</td>'
@@ -45,14 +46,14 @@ def build_email_body(total, passed, failed, skipped, report_time, drive_link):
         '</table>'
         '</td></tr>'
 
-        # VIEW REPORT LINK
-        f'<tr><td style="padding:10px 0 0 0;margin:0;font-size:13px;color:#333;">'
+        # NETLIFY LINK
+        f'<tr><td style="padding:15px 0 0 0;margin:0;font-size:13px;color:#333;">'
         f'Click below to view the complete Allure Report:<br>'
-        f'<a href="{drive_link}" style="color:#1a73e8;">Open Allure Report</a>'
+        f'<a href="{report_link}" style="color:#1a73e8;">Open Allure Report</a>'
         '</td></tr>'
 
         # FOOTER
-        '<tr><td style="padding:10px 20px 0 0;margin:0;font-size:13px;color:#333;">'
+        '<tr><td style="padding:15px 0;margin:0;font-size:13px;color:#333;">'
         'Regards,<br>'
         '<b>An SDET from the QA Automation Team.</b><br>'
         'FatakPay'
