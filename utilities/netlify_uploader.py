@@ -19,11 +19,11 @@ def deploy_to_netlify(folder_path):
     result = subprocess.run(cmd, capture_output=True, text=True)
 
     if result.returncode != 0:
-        print("❌ Netlify Upload Failed")
+        print(" Netlify Upload Failed")
         print(result.stderr)
         raise Exception("Netlify deploy failed")
 
-    print("✅ Netlify Upload Successful")
+    print(" Netlify Upload Successful")
     print(result.stdout)
 
     # Extract final URL from CLI output

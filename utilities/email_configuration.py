@@ -2,8 +2,7 @@ import yagmail
 from utilities.config_reader import get_config
 
 
-def send_report_email(html_body, attachments=None):
-
+def send_report_email(html_body):
     sender = get_config("Email", "sender")
     pwd = get_config("Email", "password")
 
@@ -17,11 +16,6 @@ def send_report_email(html_body, attachments=None):
     yag = yagmail.SMTP(user=sender, password=pwd)
 
     contents = [html_body]
-
-    # inline attachments (QR)
-    if attachments:
-        for file in attachments:
-            contents.append(yagmail.inline(file))
 
     yag.send(
         to=receivers,

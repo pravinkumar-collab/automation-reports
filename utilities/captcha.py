@@ -8,6 +8,7 @@ import zlib
 import brotli
 import zstandard as zstd  # pip install zstandard
 
+
 def solve_captcha(driver, fragment="/user/captcha-image", timeout=10):
     """
     Captures and solves a CAPTCHA from a Selenium Wire driver request.

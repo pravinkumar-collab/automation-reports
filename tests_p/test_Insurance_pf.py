@@ -1,5 +1,6 @@
 import time
 import pytest
+
 from pages.InsurancePage import InsurancePage
 from pages.LoginPage import LoginPage
 from pages.NomineePage import NomineePage
@@ -8,6 +9,7 @@ from pages.PaymentOptionsPage import PaymentOptionsPage
 from pages.PersonalDetailsPage import PersonalDetailsPage
 from pages.ReviewDetailsPage import ReviewDetailsPage
 from pages.SuperappPage import SuperappPage
+
 from ParentTest import ParentTest
 from utilities.config_reader import get_config
 

@@ -10,7 +10,6 @@ from utilities.email_html_builder import build_email_body
 
 
 def main():
-
     # STEP 1 — Create timestamped allure-results folder
     time_stamp = datetime.now().strftime("%Y-%m-%d__%H-%M-%S")
     results_dir = os.path.join("allure-results", time_stamp)
@@ -24,12 +23,12 @@ def main():
 
     # STEP 2 — Run pytest with Allure + JSON report enabled
     pytest_cmd = [
-        "pytest",
-        "-vs",
-        f"--alluredir={results_dir}",
-        "--json-report",
-        f"--json-report-file={json_report_path}",
-    ] + args
+                     "pytest",
+                     "-vs",
+                     f"--alluredir={results_dir}",
+                     "--json-report",
+                     f"--json-report-file={json_report_path}",
+                 ] + args
 
     print("\nRunning:", " ".join(pytest_cmd))
     subprocess.run(pytest_cmd)
@@ -46,7 +45,7 @@ def main():
     print("\nUploading Allure report to Netlify...")
     website_link = deploy_to_netlify(html_report_dir)
 
-    print("✅ Uploaded to Netlify:", website_link)
+    print("Uploaded to Netlify:", website_link)
 
     # STEP 6 — Build the email HTML body
     summary_html = build_email_body(total, passed, failed, skipped, duration, website_link)
