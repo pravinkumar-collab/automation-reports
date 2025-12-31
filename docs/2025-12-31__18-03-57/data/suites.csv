@@ -1,0 +1,6 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Wed Dec 31 18:04:06 IST 2025","Wed Dec 31 18:04:06 IST 2025","36","tests_cancer","test_Insurance_Cancer_LandingPage","TestCancerLandingPage","","","test_open_landing_page",""
+"passed","Wed Dec 31 18:04:28 IST 2025","Wed Dec 31 18:04:30 IST 2025","1144","tests_cancer","test_Insurance_Cancer_LandingPage","TestCancerLandingPage","","","test_summary",""
+"passed","Wed Dec 31 18:04:30 IST 2025","Wed Dec 31 18:04:46 IST 2025","16109","tests_cancer","test_Insurance_Cancer_LandingPage","TestCancerLandingPage","","","test_complete_payment",""
+"passed","Wed Dec 31 18:04:22 IST 2025","Wed Dec 31 18:04:28 IST 2025","6279","tests_cancer","test_Insurance_Cancer_LandingPage","TestCancerLandingPage","","","test_register",""
+"passed","Wed Dec 31 18:04:06 IST 2025","Wed Dec 31 18:04:22 IST 2025","15769","tests_cancer","test_Insurance_Cancer_LandingPage","TestCancerLandingPage","","","test_login",""
