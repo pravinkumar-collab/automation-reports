@@ -1,0 +1,7 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Thu Jan 22 12:20:12 IST 2026","Thu Jan 22 12:20:37 IST 2026","25245","tests_rudraksh","test_Insurance_Rudraksh_LandingPage","TestRudrakshLandingPage","","","test_login",""
+"passed","Thu Jan 22 12:20:11 IST 2026","Thu Jan 22 12:20:11 IST 2026","77","tests_rudraksh","test_Insurance_Rudraksh_LandingPage","TestRudrakshLandingPage","","","test_open_landing_page",""
+"passed","Thu Jan 22 12:20:11 IST 2026","Thu Jan 22 12:20:12 IST 2026","1309","tests_rudraksh","test_Insurance_Rudraksh_LandingPage","TestRudrakshLandingPage","","","test_mandatory_field_negative",""
+"passed","Thu Jan 22 12:20:59 IST 2026","Thu Jan 22 12:21:00 IST 2026","1203","tests_rudraksh","test_Insurance_Rudraksh_LandingPage","TestRudrakshLandingPage","","","test_summary",""
+"failed","Thu Jan 22 12:20:37 IST 2026","Thu Jan 22 12:20:45 IST 2026","7507","tests_rudraksh","test_Insurance_Rudraksh_LandingPage","TestRudrakshLandingPage","","","test_mandatory_register_negative",""
+"passed","Thu Jan 22 12:20:45 IST 2026","Thu Jan 22 12:20:59 IST 2026","13596","tests_rudraksh","test_Insurance_Rudraksh_LandingPage","TestRudrakshLandingPage","","","test_register",""
